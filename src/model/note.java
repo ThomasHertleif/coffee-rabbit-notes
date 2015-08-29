@@ -7,10 +7,10 @@ public class note {
 	private String title;
 	private Date createDate;
 	private Date changeDate;
-	private byte priority;
+	private String priority;
 	private String text;
 
-	public note(String title, byte prio, String note) {
+	public note(String title, String prio, String note) {
 		this.title = title;
 		this.createDate = new Date();
 		this.changeDate = new Date();
@@ -18,11 +18,11 @@ public class note {
 		this.text = note;
 	}
 
-	public byte getPriority() {
+	public String getPriority() {
 		return priority;
 	}
 
-	public void setPriority(byte priority) {
+	public void setPriority(String priority) {
 		this.priority = priority;
 	}
 
@@ -40,6 +40,14 @@ public class note {
 
 	public Date getChangeDate() {
 		return changeDate;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }
