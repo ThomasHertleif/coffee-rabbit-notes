@@ -32,6 +32,7 @@ public class MainView {
 
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Coffee Rabbit Note");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[][grow]"));
@@ -57,6 +58,7 @@ public class MainView {
 		mnAbout = new JMenuItem("\u00DCber");
 		mnHelp.add(mnAbout);
 		
+		// TODO: Maybe move this to a controller...
 		mnAbout.addActionListener((e) -> {
 			Component infoFrame = null;
 			JOptionPane.showMessageDialog(infoFrame, "Coffee Rabbit Notes v0.0.0 von Thomas Hertleif", "Über",

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class note {
+public class Note {
 
 	private String title;
 	private Date createDate;
@@ -10,7 +10,7 @@ public class note {
 	private String priority;
 	private String text;
 
-	public note(String title, String prio, String note) {
+	public Note(String title, String prio, String note) {
 		this.title = title;
 		this.createDate = new Date();
 		this.changeDate = new Date();
@@ -48,6 +48,10 @@ public class note {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public void updateChangeDate() {
+		changeDate = new Date();
 	}
 
 }
