@@ -1,15 +1,14 @@
 package view;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MainView {
 
@@ -30,7 +29,7 @@ public class MainView {
 		
 		btnNewNote = new JButton("Neue Notiz");
 
-		frame.getContentPane().add(btnNewNote, "cell 0 0");
+		frame.getContentPane().add(btnNewNote, "cell 0 0,alignx center");
 		
 		txtSearch = new JTextField();
 		txtSearch.setText("Suche");
@@ -38,6 +37,7 @@ public class MainView {
 		txtSearch.setColumns(10);
 
 		frame.getContentPane().add(scrollPane, "cell 0 1 2 1,grow");
+		scrollPane.setViewportView(new NoteTable());
 		
 		//TODO: Auto update the View!
 		frame.setVisible(true);
