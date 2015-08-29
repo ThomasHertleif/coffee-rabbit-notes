@@ -9,3 +9,9 @@
 - Sort Notes by time
 - Sort Notes by priority
 - Secure notes saved on the disk
+
+## Used Stuff
+- Eclipse
+- WindowBuilder
+- MigLayout
+- Git over Bitbucket
