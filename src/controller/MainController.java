@@ -1,30 +1,40 @@
 package controller;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import view.*;
 
 import view.*;
+import model.*;
 
-
+// TODO: Make sub controller?
 public class MainController {
-	
+
 	private MainView mainView;
-	
-	public MainController(MainView MainView) {
+	private NoteStore noteStore;
+	private NewNotePanel newNotePanel = new view.NewNotePanel();
+	private NoteTable noteTable = new view.NoteTable();
+
+	public MainController(MainView MainView, NoteStore noteStore) {
 		this.mainView = MainView;
-	
-		this.mainView.setNewNoteListener(new ActionListener() {
+		this.noteStore = noteStore;
+		this.mainView.setscrollPaneContent(noteTable);
+		
+		// MainView
+		this.mainView.setNewNoteListener((e) -> {
+			// TODO: Remove debug Info
+			System.out.println("Creating a new note.");
+			mainView.setscrollPaneContent(newNotePanel);
+		});
+
+		// NewNotePanel
+		this.newNotePanel.setSaveListener((e) -> {
+			// TODO: Remove debug Info
+			System.out.println("Start save");
+			Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(), this.newNotePanel.getText());
+			this.noteStore.add(newNote);
+			this.mainView.setscrollPaneContent(noteTable);
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("New Note will be made");
-				
-				mainView.setscrollPaneContent(new view.NewNotePanel());
-				
-			}
+		});
+		
+		this.newNotePanel.setCancelListener((e) -> {
+			this.mainView.setscrollPaneContent(noteTable);
 		});
 	}
-	
-	
-	
 }
