@@ -1,14 +1,23 @@
 # Coffee Rabbit Notes
 
-## TODO
-- Nice GUI
+## Goals
+- Useful GUI
 - Add Notes
-- Delete Notes
 - Save Notes to disk
-- Password secure
+- Delete Notes
 - Sort Notes by time
 - Sort Notes by priority
-- Secure notes saved on the disk
+- Password secure
+
+## Nice to have
+- Encrypt notes saved on the disk
+
+## Milestones
+- Build a simple GUI
+- Note Object
+- Save files to disk
+- Encrypt files
+- Stuff
 
 ## Used Stuff
 - Eclipse
