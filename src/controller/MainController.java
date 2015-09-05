@@ -1,6 +1,11 @@
 package controller;
 
 import view.*;
+
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import model.*;
 
 // TODO: Make sub controller?
@@ -17,7 +22,7 @@ public class MainController {
 		this.mainView = MainView;
 		this.noteStore = noteStore;
 		this.mainView.setscrollPaneContent(noteTable);
-		
+
 		// MainView
 		this.mainView.setNewNoteListener((e) -> {
 			// TODO: Remove debug Info
@@ -29,22 +34,33 @@ public class MainController {
 		this.newNotePanel.setSaveListener((e) -> {
 			// TODO: Remove debug Info
 			System.out.println("Start save");
-			Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(), this.newNotePanel.getText());
+			Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
+					this.newNotePanel.getText());
 			this.noteStore.add(newNote);
 			this.mainView.setscrollPaneContent(noteTable);
-			
+
 			this.fileWriter.writeToDisk(newNote);
-			
+
 		});
-		
+
 		this.newNotePanel.setCancelListener((e) -> {
 			this.mainView.setscrollPaneContent(noteTable);
 		});
-		
-		
-		// TODO: Specify the File to load 
+
+		// TODO: Specify the File to load
 		this.mainView.setFileOpenListener((e) -> {
-			this.noteLoader.loadNote();
+
+			JFileChooser fileSelect = new JFileChooser();
+			fileSelect.setMultiSelectionEnabled(false);
+			fileSelect.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			int returnVal = fileSelect.showOpenDialog(null);
+
+			if (returnVal != JFileChooser.APPROVE_OPTION) {
+				return;
+			}
+			
+			this.noteLoader.loadNote(fileSelect.getSelectedFile().toString());
 		});
 	}
 }
