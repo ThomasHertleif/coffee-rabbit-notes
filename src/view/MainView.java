@@ -24,6 +24,8 @@ public class MainView {
 	private JMenuBar menuBar;
 	private JMenu mnHelp;
 	private JMenuItem mnAbout;
+	private JMenu mnDatei;
+	private JMenuItem mntmOpenFile;
 
 	public MainView() {
 		initialize();
@@ -49,6 +51,12 @@ public class MainView {
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
+		
+		mnDatei = new JMenu("Datei");
+		menuBar.add(mnDatei);
+		
+		mntmOpenFile = new JMenuItem("Datei öffnen");
+		mnDatei.add(mntmOpenFile);
 
 		mnHelp = new JMenu("Hilfe");
 		menuBar.add(mnHelp);
@@ -72,7 +80,11 @@ public class MainView {
 	}
 
 	public void setscrollPaneContent(JPanel newPanel) {
-		scrollPane.setViewportView(newPanel);
+		this.scrollPane.setViewportView(newPanel);
+	}
+	
+	public void setFileOpenListener(ActionListener l) {
+		this.mntmOpenFile.addActionListener(l);
 	}
 
 }

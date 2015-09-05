@@ -26,7 +26,6 @@ public class NewNotePanel extends JPanel {
 		add(textArea, "cell 0 1 2 1,grow");
 		add(btnSave, "cell 0 2,alignx center");
 		add(btnCancel, "cell 1 2,alignx center");
-
 		JLabel lblTitle = new JLabel("Titel:");
 		add(lblTitle, "flowx,cell 0 0,alignx center");
 
@@ -34,7 +33,7 @@ public class NewNotePanel extends JPanel {
 		add(txtTitle, "cell 0 0");
 		txtTitle.setColumns(10);
 
-		JLabel lblPrio = new JLabel("Priorit\u00E4t:");
+		JLabel lblPrio = new JLabel("Priorität:");
 		add(lblPrio, "flowx,cell 1 0,alignx center");
 
 		add(cboxPrio, "cell 1 0");
