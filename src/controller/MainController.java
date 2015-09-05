@@ -7,11 +7,13 @@ import model.*;
 public class MainController {
 
 	private MainView mainView;
-	private NoteStore noteStore;
+	private Store<Note> noteStore;
 	private NewNotePanel newNotePanel = new view.NewNotePanel();
-	private NoteTable noteTable = new view.NoteTable();
+	private NoteTable noteTable = new view.NoteTable(noteStore);
+	private NoteWriter fileWriter = new NoteWriter();
+	private NoteLoader noteLoader = new NoteLoader();
 
-	public MainController(MainView MainView, NoteStore noteStore) {
+	public MainController(MainView MainView, Store<Note> noteStore) {
 		this.mainView = MainView;
 		this.noteStore = noteStore;
 		this.mainView.setscrollPaneContent(noteTable);
@@ -31,10 +33,18 @@ public class MainController {
 			this.noteStore.add(newNote);
 			this.mainView.setscrollPaneContent(noteTable);
 			
+			this.fileWriter.writeToDisk(newNote);
+			
 		});
 		
 		this.newNotePanel.setCancelListener((e) -> {
 			this.mainView.setscrollPaneContent(noteTable);
+		});
+		
+		
+		// TODO: Specify the File to load 
+		this.mainView.setFileOpenListener((e) -> {
+			this.noteLoader.loadNote();
 		});
 	}
 }
