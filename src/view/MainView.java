@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
@@ -32,6 +33,12 @@ public class MainView {
 	}
 
 	private void initialize() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
 		frame = new JFrame();
 		frame.setTitle("Coffee Rabbit Note");
 		frame.setBounds(100, 100, 450, 300);
@@ -51,10 +58,10 @@ public class MainView {
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
-		
+
 		mntmOpenFile = new JMenuItem("Datei öffnen");
 		mnDatei.add(mntmOpenFile);
 
@@ -82,9 +89,8 @@ public class MainView {
 	public void setscrollPaneContent(JPanel newPanel) {
 		this.scrollPane.setViewportView(newPanel);
 	}
-	
+
 	public void setFileOpenListener(ActionListener l) {
 		this.mntmOpenFile.addActionListener(l);
 	}
-
 }
