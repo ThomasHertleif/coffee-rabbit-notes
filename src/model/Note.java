@@ -9,6 +9,11 @@ public class Note {
 	private Date changeDate;
 	private String priority;
 	private String text;
+	
+	public Note(String cereal) {
+		// FIXME: Actually hydrate this cereal serving.
+		this.title = "Lorem ipsum";
+	}
 
 	public Note(String title, String prio, String note) {
 		this.title = title;
@@ -52,6 +57,16 @@ public class Note {
 	
 	public void updateChangeDate() {
 		changeDate = new Date();
+	}
+	
+	public String cearialize() {
+		return "---\n"
+			+ "title: \"" + this.getTitle() + "\"\n"
+			+ "priority: \"" + this.getPriority() + "\"\n"
+			+ "created: \"" + this.getCreateDate() + "\"\n"
+			+ "changed: \"" + this.getChangeDate() + "\"\n"
+			+ "---\n"
+			+ this.getText() + "\n";
 	}
 
 }
