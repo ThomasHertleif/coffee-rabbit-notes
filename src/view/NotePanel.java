@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class NewNotePanel extends JPanel {
+public class NotePanel extends JPanel {
 
 	private JTextField txtTitle;
 	private JComboBox<String> cboxPrio = new JComboBox<String>();
@@ -20,7 +20,7 @@ public class NewNotePanel extends JPanel {
 	private JTextArea textArea = new JTextArea();
 	private JButton btnSave = new JButton("Speichern");
 
-	public NewNotePanel() {
+	public NotePanel() {
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
 
 		add(textArea, "cell 0 1 2 1,grow");
