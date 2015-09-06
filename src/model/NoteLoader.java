@@ -1,8 +1,10 @@
 package model;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class NoteLoader {
 
@@ -14,21 +16,15 @@ public class NoteLoader {
 
 	}
 
-	public void loadNote() {
+	public void loadNote(String fileName) {
 		try {
-			reader = new FileReader("test.txt");
-
-			try {
-				System.out.println(reader.read());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String entireFileText = new Scanner(new File(fileName)).useDelimiter("\\A").next();
+			System.out.println(entireFileText);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Failed to load Note");
 		}
 	}
+	
 
 }
