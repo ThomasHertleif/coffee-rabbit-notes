@@ -1,26 +1,36 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Note {
 
 	private String title;
-	private Date createDate;
-	private Date changeDate;
+	private LocalDateTime createDate;
+	private LocalDateTime changeDate;
 	private String priority;
 	private String text;
-	
-	public Note(String cereal) {
-		// FIXME: Actually hydrate this cereal serving.
-		this.title = "Lorem ipsum";
-	}
 
 	public Note(String title, String prio, String note) {
 		this.title = title;
-		this.createDate = new Date();
-		this.changeDate = new Date();
-		this.priority = prio; // 0 = low 1 = normal 2 = high
+		this.createDate = LocalDateTime.now();
+		this.changeDate = LocalDateTime.now();
+		this.priority = prio;
 		this.text = note;
+	}
+	
+	public Note(String title, String prio, String note, String create, String change) {
+		
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+		this.title = title;
+		this.createDate =  LocalDateTime.parse(create, dateFormatter);
+		this.changeDate = LocalDateTime.parse(change, dateFormatter);
+		this.priority = prio;
+		this.text = note;
+		
+		this.updateChangeDate();
 	}
 
 	public String getPriority() {
@@ -39,11 +49,11 @@ public class Note {
 		this.text = text;
 	}
 
-	public Date getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public Date getChangeDate() {
+	public LocalDateTime getChangeDate() {
 		return changeDate;
 	}
 
@@ -54,19 +64,20 @@ public class Note {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public void updateChangeDate() {
-		changeDate = new Date();
+		changeDate = LocalDateTime.now();
 	}
+
 	
+	// Hmm cearial
 	public String cearialize() {
-		return "---\n"
-			+ "title: \"" + this.getTitle() + "\"\n"
-			+ "priority: \"" + this.getPriority() + "\"\n"
-			+ "created: \"" + this.getCreateDate() + "\"\n"
-			+ "changed: \"" + this.getChangeDate() + "\"\n"
-			+ "---\n"
-			+ this.getText() + "\n";
+		return "---\n" +
+				"title: \"" + this.getTitle() +"\"\n" +
+				"priority: \"" + this.getPriority() + "\"\n" +
+				"created: \"" + this.getCreateDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\"\n" +
+				"changed: \"" + this.getChangeDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\"\n" +
+				"---\n" + this.getText() + "\n";
 	}
 
 }
