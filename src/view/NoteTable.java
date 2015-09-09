@@ -1,11 +1,9 @@
 package view;
 
-import java.io.File;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import model.*;
 

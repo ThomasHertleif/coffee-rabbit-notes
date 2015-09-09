@@ -75,7 +75,7 @@ public class MainView {
 
 		mntmOpenFile = new JMenuItem("Datei öffnen");
 		mnDatei.add(mntmOpenFile);
-		
+
 		mnOpenFolder = new JMenuItem("Ordner öffnen");
 		mnDatei.add(mnOpenFolder);
 
@@ -102,7 +102,7 @@ public class MainView {
 	public void setscrollPaneContent(JPanel newPanel) {
 		this.scrollPane.setViewportView(newPanel);
 	}
-	
+
 	public void setScrollTable(JPanel newPanel) {
 		this.scrollTable.setViewportView(newPanel);
 	}
@@ -110,7 +110,7 @@ public class MainView {
 	public void setFileOpenListener(ActionListener l) {
 		this.mntmOpenFile.addActionListener(l);
 	}
-	
+
 	public void setFolderListener(ActionListener l) {
 		this.mnOpenFolder.addActionListener(l);
 	}

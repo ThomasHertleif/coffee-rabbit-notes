@@ -1,5 +1,3 @@
-import model.*;
-
 public class Main {
 
 	static controller.MainController mainController;

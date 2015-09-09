@@ -10,11 +10,8 @@ public class NoteWriter {
 	private Note note;
 	private Store<Note> noteStore;
 
-	// TODO: Path Fix
 	public NoteWriter(Store<Note> noteStore) {
-
 		this.noteStore = noteStore;
-
 	}
 
 	public Stream<String[]> serializeNotes(Store<Note> notes) {
@@ -25,6 +22,7 @@ public class NoteWriter {
 		});
 	}
 
+	// Maybe for later use...
 	public void newNotebook(String name) {
 
 		try {
