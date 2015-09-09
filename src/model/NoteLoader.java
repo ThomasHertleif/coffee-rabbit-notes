@@ -2,29 +2,58 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class NoteLoader {
 
-	private FileReader reader;
+	static private String keyVal = "^(?<key>\\w*): \"(?<val>.*)\"";
+	private Store<Note> noteStore;
 
-	public NoteLoader() {
-
-		// Load Stuff
+	public NoteLoader(Store<Note> noteStore) {
+		this.noteStore = noteStore;
 
 	}
 
-	public void loadNote(String fileName) {
-		try {
-			String entireFileText = new Scanner(new File(fileName)).useDelimiter("\\A").next();
-			System.out.println(entireFileText);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Failed to load Note");
+	public Note loadNote(File file) throws FileNotFoundException {
+		Scanner sc = new Scanner(file);
+
+		sc.nextLine(); // "---"
+
+		String title = sc.nextLine().replaceAll(keyVal, "${val}");
+		String priority = sc.nextLine().replaceAll(keyVal, "${val}");
+		String created = sc.nextLine().replaceAll(keyVal, "${val}");
+		String changed = sc.nextLine().replaceAll(keyVal, "${val}");
+
+		sc.nextLine(); // "---"
+
+		String content = sc.useDelimiter("\\A").next();
+
+		Note leNote = new Note(title, priority, content, created, changed);
+
+		sc.close();
+
+		return leNote;
+	}
+
+	public void loadDirectory(File[] files) throws FileNotFoundException {
+
+		for (int i = 0; i < files.length; i++) {
+			Scanner sc = new Scanner(files[i]);
+			sc.nextLine(); // "---"
+
+			String title = sc.nextLine().replaceAll(keyVal, "${val}");
+			String priority = sc.nextLine().replaceAll(keyVal, "${val}");
+			String created = sc.nextLine().replaceAll(keyVal, "${val}");
+			String changed = sc.nextLine().replaceAll(keyVal, "${val}");
+
+			sc.nextLine(); // "---"
+
+			String content = sc.useDelimiter("\\A").next();
+			Note leNote = new Note(title, priority, content, created, changed);
+
+			noteStore.add(leNote);
+			System.out.println("Note add");
+			sc.close();
 		}
 	}
-	
-
 }
