@@ -16,6 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import model.*;
+
 public class MainView {
 
 	private JFrame frame;
@@ -27,6 +29,10 @@ public class MainView {
 	private JMenuItem mnAbout;
 	private JMenu mnDatei;
 	private JMenuItem mntmOpenFile;
+	private JScrollPane scrollTable;
+	private NoteTable noteTable;
+	private Store<Note> noteStore;
+	private JMenuItem mnOpenFolder;
 
 	public MainView() {
 		initialize();
@@ -41,20 +47,25 @@ public class MainView {
 
 		frame = new JFrame();
 		frame.setTitle("Coffee Rabbit Note");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 699, 554);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][grow]", "[][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow 150][grow][grow]", "[][grow]"));
 
 		btnNewNote = new JButton("Neue Notiz");
 
-		frame.getContentPane().add(btnNewNote, "cell 0 0,alignx center");
+		frame.getContentPane().add(btnNewNote, "cell 1 0,alignx center");
 
 		txtSearch = new JTextField();
 		txtSearch.setText("Suche");
-		frame.getContentPane().add(txtSearch, "cell 1 0,growx");
+		frame.getContentPane().add(txtSearch, "cell 2 0,growx");
 		txtSearch.setColumns(10);
 
-		frame.getContentPane().add(scrollPane, "cell 0 1 2 1,grow");
+		scrollTable = new JScrollPane();
+		frame.getContentPane().add(scrollTable, "cell 0 1,grow");
+		noteTable = new NoteTable(noteStore);
+		scrollTable.setViewportView(noteTable);
+
+		frame.getContentPane().add(scrollPane, "cell 1 1 2 1,grow");
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -64,6 +75,9 @@ public class MainView {
 
 		mntmOpenFile = new JMenuItem("Datei öffnen");
 		mnDatei.add(mntmOpenFile);
+		
+		mnOpenFolder = new JMenuItem("Ordner öffnen");
+		mnDatei.add(mnOpenFolder);
 
 		mnHelp = new JMenu("Hilfe");
 		menuBar.add(mnHelp);
@@ -78,7 +92,6 @@ public class MainView {
 					JOptionPane.PLAIN_MESSAGE);
 		});
 
-		// TODO: Auto update the view!
 		frame.setVisible(true);
 	}
 
@@ -89,8 +102,16 @@ public class MainView {
 	public void setscrollPaneContent(JPanel newPanel) {
 		this.scrollPane.setViewportView(newPanel);
 	}
+	
+	public void setScrollTable(JPanel newPanel) {
+		this.scrollTable.setViewportView(newPanel);
+	}
 
 	public void setFileOpenListener(ActionListener l) {
 		this.mntmOpenFile.addActionListener(l);
+	}
+	
+	public void setFolderListener(ActionListener l) {
+		this.mnOpenFolder.addActionListener(l);
 	}
 }
