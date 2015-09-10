@@ -38,18 +38,26 @@ public class MainController {
 		this.newNotePanel.setSaveListener((e) -> {
 			// TODO: Remove debug Info
 			System.out.println("Start save");
-			Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
-					this.newNotePanel.getText());
-			this.noteStore.add(newNote);
-			this.mainView.setScrollTable(noteTable);
 
-			this.noteWriter.writeToDisk(newNote);
+			Note existingNote = this.newNotePanel.getCurrentNote();
 
-		});
+			if (existingNote != null) {
+				System.out.println("existing note" + existingNote);
+				existingNote.setTitle(this.newNotePanel.getTitle());
+				existingNote.setPriority(this.newNotePanel.getPrio());
+				existingNote.setText(this.newNotePanel.getText());
 
-		this.newNotePanel.setCancelListener((e) -> {
-			// TODO: Remove Cancel Button
-			this.mainView.setscrollPaneContent(noteTable);
+				this.noteWriter.writeToDisk(existingNote);
+			} else {
+				System.out.println("its a new note, its a new day, ...");
+				Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
+						this.newNotePanel.getText());
+
+				this.noteStore.add(newNote);
+				this.noteWriter.writeToDisk(newNote);
+			}
+
+			this.noteTable.updateTable();
 		});
 
 		this.mainView.setFileOpenListener((e) -> {
@@ -89,11 +97,16 @@ public class MainController {
 
 			try {
 				this.noteLoader.loadDirectory(folderSelect.getSelectedFile().listFiles());
-				this.noteTable.updateTable(noteStore);
+				this.noteTable.updateTable();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
+
+		this.noteTable.setSelectionListener((e) -> {
+			this.newNotePanel.setNote(noteStore.getAll().get(noteTable.getSelected()));
+			this.mainView.setscrollPaneContent(newNotePanel);
+		});
+
 	}
 }

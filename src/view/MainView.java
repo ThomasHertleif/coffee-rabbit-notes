@@ -47,7 +47,7 @@ public class MainView {
 
 		frame = new JFrame();
 		frame.setTitle("Coffee Rabbit Note");
-		frame.setBounds(100, 100, 699, 554);
+		frame.setBounds(100, 100, 843, 562);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow 150][grow][grow]", "[][grow]"));
 

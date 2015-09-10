@@ -24,6 +24,11 @@ public class Store<T> {
 		return data;
 	}
 	
-	
-
+	public void clearStore() {
+		if (data.isEmpty() == false) {
+			for (int i = 0; i < data.size(); i++) {
+				data.remove(i);
+			}
+		}
+	}
 }

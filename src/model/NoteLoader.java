@@ -37,6 +37,8 @@ public class NoteLoader {
 
 	public void loadDirectory(File[] files) throws FileNotFoundException {
 
+		this.noteStore.clearStore();
+		
 		for (int i = 0; i < files.length; i++) {
 			Scanner sc = new Scanner(files[i]);
 			sc.nextLine(); // "---"

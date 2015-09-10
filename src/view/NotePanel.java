@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import model.Note;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
@@ -11,21 +14,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class NotePanel extends JPanel {
 
 	private JTextField txtTitle;
 	private JComboBox<String> cboxPrio = new JComboBox<String>();
-
-	private JButton btnCancel = new JButton("Abbrechen");
 	private JTextArea textArea = new JTextArea();
 	private JButton btnSave = new JButton("Speichern");
+
+	private Note currentNote = null;
 
 	public NotePanel() {
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
 
 		add(textArea, "cell 0 1 2 1,grow");
 		add(btnSave, "cell 0 2,alignx center");
-		add(btnCancel, "cell 1 2,alignx center");
 		JLabel lblTitle = new JLabel("Titel:");
 		add(lblTitle, "flowx,cell 0 0,alignx center");
 
@@ -48,10 +51,6 @@ public class NotePanel extends JPanel {
 		this.btnSave.addActionListener(l);
 	}
 
-	public void setCancelListener(ActionListener l) {
-		this.btnCancel.addActionListener(l);
-	}
-
 	public String getTitle() {
 		return txtTitle.getText();
 	}
@@ -62,5 +61,28 @@ public class NotePanel extends JPanel {
 
 	public String getText() {
 		return textArea.getText();
+	}
+
+	public void setTitle(String t) {
+		this.txtTitle.setText(t);
+	}
+
+	public void setPrio(String t) {
+		this.cboxPrio.setSelectedItem(t);
+	}
+
+	public void setText(String t) {
+		this.textArea.setText(t);
+	}
+
+	public Note getCurrentNote() {
+		return currentNote;
+	}
+
+	public void setNote(Note sNote) {
+		this.currentNote = sNote;
+		txtTitle.setText(sNote.getTitle());
+		cboxPrio.setSelectedItem(sNote.getPriority());
+		textArea.setText(sNote.getText());
 	}
 }
