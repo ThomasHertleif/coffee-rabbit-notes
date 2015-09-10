@@ -29,7 +29,6 @@ public class MainView {
 	private JScrollPane scrollTable;
 	private NoteTable noteTable;
 	private Store<Note> noteStore;
-	private JButton btnOpenFolder;
 
 	public MainView() {
 		initialize();
@@ -47,9 +46,6 @@ public class MainView {
 		frame.setBounds(100, 100, 843, 562);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow 150][grow][grow]", "[][grow]"));
-		
-		btnOpenFolder = new JButton("Ordner öffnen");
-		frame.getContentPane().add(btnOpenFolder, "cell 0 0");
 
 		btnNewNote = new JButton("Neue Notiz");
 
@@ -64,8 +60,6 @@ public class MainView {
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
-		
 
 		mnHelp = new JMenu("Hilfe");
 		menuBar.add(mnHelp);
@@ -95,7 +89,4 @@ public class MainView {
 		this.scrollTable.setViewportView(newPanel);
 	}
 
-	public void setFolderListener(ActionListener l) {
-		this.btnOpenFolder.addActionListener(l);
-	}
 }

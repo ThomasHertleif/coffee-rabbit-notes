@@ -3,6 +3,8 @@ package controller;
 import view.*;
 
 import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -19,7 +21,7 @@ public class MainController {
 	private NoteWriter noteWriter;
 	private NoteLoader noteLoader;
 
-	public MainController() {
+	public MainController() throws FileNotFoundException {
 		this.noteStore = new Store<Note>();
 		this.newNotePanel = new view.NotePanel();
 		this.noteTable = new NoteTable(noteStore);
@@ -29,7 +31,12 @@ public class MainController {
 		this.mainView = new MainView();
 		this.mainView.setscrollPaneContent(newNotePanel);
 		this.mainView.setScrollTable(noteTable);
-
+		
+		
+		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/");
+		File[] listOfFiles = dir.listFiles();
+		this.noteLoader.loadDirectory(listOfFiles);
+		this.noteTable.updateTable();
 		// MainView
 		this.mainView.setNewNoteListener((e) -> {
 			// TODO: Remove debug Info
@@ -42,7 +49,7 @@ public class MainController {
 			// TODO: Remove debug Info
 			System.out.println("Start save");
 
-			if (this.newNotePanel.getText().equals("")) {
+			if (this.newNotePanel.getTitle().equals("")) {
 				Component infoFrame = null;
 				JOptionPane.showMessageDialog(infoFrame, "Bitte Titel eingeben.", "Warnung", JOptionPane.PLAIN_MESSAGE);
 
@@ -68,25 +75,6 @@ public class MainController {
 
 				this.noteTable.updateTable();
 				this.newNotePanel.clear();
-			}
-		});
-
-		this.mainView.setFolderListener((e) -> {
-			JFileChooser folderSelect = new JFileChooser();
-			folderSelect.setMultiSelectionEnabled(false);
-			folderSelect.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-			int returnVal = folderSelect.showOpenDialog(null);
-
-			if (returnVal != JFileChooser.APPROVE_OPTION) {
-				return;
-			}
-
-			try {
-				this.noteLoader.loadDirectory(folderSelect.getSelectedFile().listFiles());
-				this.noteTable.updateTable();
-			} catch (Exception e1) {
-				e1.printStackTrace();
 			}
 		});
 
