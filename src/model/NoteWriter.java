@@ -53,8 +53,6 @@ public class NoteWriter {
 	// }
 
 	public void writeToDisk(Note note) {
-		// TODO: Remove debug info
-		System.out.println("Writing note to Disk");
 
 		this.note = note;
 		
@@ -69,10 +67,8 @@ public class NoteWriter {
 			writer.write(note.cearialize());
 			writer.flush();
 			writer.close();
-			System.out.println("File writen to the disk");
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Writer error");
 		}
 	}
 }

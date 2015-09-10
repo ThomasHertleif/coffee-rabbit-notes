@@ -54,7 +54,6 @@ public class NoteLoader {
 			Note leNote = new Note(title, priority, content, created, changed);
 
 			noteStore.add(leNote);
-			System.out.println("Note add");
 			sc.close();
 		}
 	}

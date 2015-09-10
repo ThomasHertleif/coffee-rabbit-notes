@@ -57,7 +57,6 @@ public class NoteTable extends JPanel {
 			dtm.addRow(new Object[] { noteStore.getAll().get(i).getTitle(), noteStore.getAll().get(i).getCreateDate(),
 					noteStore.getAll().get(i).getChangeDate(), noteStore.getAll().get(i).getPriority() });
 		}
-		System.out.println(noteStore.getAll().size());
 		tbl_noteList.updateUI();
 
 	}

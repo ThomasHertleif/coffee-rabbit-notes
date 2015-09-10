@@ -7,8 +7,6 @@ public class Store<T> {
 	private ArrayList<T> data;
 	
 	public Store() {
-		// TODO: Remove debug info
-		System.out.println("Create new NoteStore");
 		data = new ArrayList<T>();
 	}
 

@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import model.*;
@@ -39,15 +38,11 @@ public class MainController {
 		this.noteTable.updateTable();
 		// MainView
 		this.mainView.setNewNoteListener((e) -> {
-			// TODO: Remove debug Info
-			System.out.println("Creating a new note.");
 			mainView.setscrollPaneContent(this.newNotePanel);
 		});
 
 		// NewNotePanel
 		this.newNotePanel.setSaveListener((e) -> {
-			// TODO: Remove debug Info
-			System.out.println("Start save");
 
 			if (this.newNotePanel.getTitle().equals("")) {
 				Component infoFrame = null;
@@ -58,14 +53,12 @@ public class MainController {
 				Note existingNote = this.newNotePanel.getCurrentNote();
 
 				if (existingNote != null) {
-					System.out.println("existing note" + existingNote);
 					existingNote.setTitle(this.newNotePanel.getTitle());
 					existingNote.setPriority(this.newNotePanel.getPrio());
 					existingNote.setText(this.newNotePanel.getText());
 
 					this.noteWriter.writeToDisk(existingNote);
 				} else {
-					System.out.println("its a new note, its a new day, ...");
 					Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
 							this.newNotePanel.getText());
 
