@@ -86,6 +86,10 @@ public class NotePanel extends JPanel {
 		textArea.setText(sNote.getText());
 	}
 	
+	public void removeNote() {
+		this.currentNote = null;
+	}
+	
 	public void clear() {
 
 		txtTitle.setText("");

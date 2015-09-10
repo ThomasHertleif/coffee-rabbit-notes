@@ -30,15 +30,18 @@ public class MainController {
 		this.mainView = new MainView();
 		this.mainView.setscrollPaneContent(newNotePanel);
 		this.mainView.setScrollTable(noteTable);
-		
-		
+
 		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/");
 		File[] listOfFiles = dir.listFiles();
-		this.noteLoader.loadDirectory(listOfFiles);
-		this.noteTable.updateTable();
+		if (dir.exists() == true) {
+			this.noteLoader.loadDirectory(listOfFiles);
+			this.noteTable.updateTable();
+		}
+		dir.mkdir();
 		// MainView
 		this.mainView.setNewNoteListener((e) -> {
-			mainView.setscrollPaneContent(this.newNotePanel);
+			this.newNotePanel.clear();
+			this.newNotePanel.removeNote();
 		});
 
 		// NewNotePanel

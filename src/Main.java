@@ -1,4 +1,8 @@
+import java.awt.Component;
 import java.io.FileNotFoundException;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 public class Main {
 

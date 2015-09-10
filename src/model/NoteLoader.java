@@ -39,8 +39,10 @@ public class NoteLoader {
 
 		this.noteStore.clearStore();
 		
+		
+		
 		for (int i = 0; i < files.length; i++) {
-			Scanner sc = new Scanner(files[i]);
+			Scanner sc = new Scanner(files[i]);	
 			sc.nextLine(); // "---"
 
 			String title = sc.nextLine().replaceAll(keyVal, "${val}");
