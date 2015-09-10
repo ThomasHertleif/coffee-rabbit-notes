@@ -14,24 +14,24 @@ public class NoteWriter {
 		this.noteStore = noteStore;
 	}
 
-	public Stream<String[]> serializeNotes(Store<Note> notes) {
-		return notes.getAll().stream().map((note) -> {
-			// FIXME: add uuid field to note and use it instead of title here.
-			String[] nameAndContent = { note.getTitle(), note.cearialize() };
-			return nameAndContent;
-		});
-	}
+//	public Stream<String[]> serializeNotes(Store<Note> notes) {
+//		return notes.getAll().stream().map((note) -> {
+//			// FIXME: add uuid field to note and use it instead of title here.
+//			String[] nameAndContent = { note.getTitle(), note.cearialize() };
+//			return nameAndContent;
+//		});
+//	}
 
 	// Maybe for later use...
-	public void newNotebook(String name) {
-
-		try {
-			FileOutputStream dest = new FileOutputStream("C:/Users/Thomas/Documents/Notes/" + name + ".crnz");
-			ZipOutputStream zipOut = new ZipOutputStream(new BufferedOutputStream(dest));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void newNotebook(String name) {
+//
+//		try {
+//			FileOutputStream dest = new FileOutputStream("C:/Users/Thomas/Documents/Notes/" + name + ".crnz");
+//			ZipOutputStream zipOut = new ZipOutputStream(new BufferedOutputStream(dest));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	// public void writeToDisk(Stream<String[]> textStream) {
 	// textStream.forEach((nameAndContent) -> {
@@ -57,9 +57,14 @@ public class NoteWriter {
 		System.out.println("Writing note to Disk");
 
 		this.note = note;
-
+		
+		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/");
+		if (dir.exists() == false) {
+			dir.mkdir();
+		}
+		
 		try {
-			writer = new FileWriter("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/Notes/"
+			writer = new FileWriter("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/"
 					+ note.getTitle() + ".crnz");
 			writer.write(note.cearialize());
 			writer.flush();
