@@ -2,8 +2,11 @@ package controller;
 
 import view.*;
 
+import java.awt.Component;
+import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
 
 import model.*;
 
@@ -31,7 +34,7 @@ public class MainController {
 		this.mainView.setNewNoteListener((e) -> {
 			// TODO: Remove debug Info
 			System.out.println("Creating a new note.");
-			mainView.setscrollPaneContent(new NotePanel());
+			mainView.setscrollPaneContent(this.newNotePanel);
 		});
 
 		// NewNotePanel
@@ -39,48 +42,32 @@ public class MainController {
 			// TODO: Remove debug Info
 			System.out.println("Start save");
 
-			Note existingNote = this.newNotePanel.getCurrentNote();
+			if (this.newNotePanel.getText().equals("")) {
+				Component infoFrame = null;
+				JOptionPane.showMessageDialog(infoFrame, "Bitte Titel eingeben.", "Warnung", JOptionPane.PLAIN_MESSAGE);
 
-			if (existingNote != null) {
-				System.out.println("existing note" + existingNote);
-				existingNote.setTitle(this.newNotePanel.getTitle());
-				existingNote.setPriority(this.newNotePanel.getPrio());
-				existingNote.setText(this.newNotePanel.getText());
-
-				this.noteWriter.writeToDisk(existingNote);
 			} else {
-				System.out.println("its a new note, its a new day, ...");
-				Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
-						this.newNotePanel.getText());
 
-				this.noteStore.add(newNote);
-				this.noteWriter.writeToDisk(newNote);
-			}
+				Note existingNote = this.newNotePanel.getCurrentNote();
 
-			this.noteTable.updateTable();
-		});
+				if (existingNote != null) {
+					System.out.println("existing note" + existingNote);
+					existingNote.setTitle(this.newNotePanel.getTitle());
+					existingNote.setPriority(this.newNotePanel.getPrio());
+					existingNote.setText(this.newNotePanel.getText());
 
-		this.mainView.setFileOpenListener((e) -> {
+					this.noteWriter.writeToDisk(existingNote);
+				} else {
+					System.out.println("its a new note, its a new day, ...");
+					Note newNote = new Note(this.newNotePanel.getTitle(), this.newNotePanel.getPrio(),
+							this.newNotePanel.getText());
 
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("Coffee Rabbit Notebook", "crnz");
+					this.noteStore.add(newNote);
+					this.noteWriter.writeToDisk(newNote);
+				}
 
-			JFileChooser fileSelect = new JFileChooser();
-			fileSelect.setMultiSelectionEnabled(false);
-			fileSelect.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fileSelect.setFileFilter(filter);
-
-			int returnVal = fileSelect.showOpenDialog(null);
-
-			if (returnVal != JFileChooser.APPROVE_OPTION) {
-				return;
-			}
-
-			try {
-				Note newNote = this.noteLoader.loadNote(fileSelect.getSelectedFile());
-				System.out.println(newNote);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				this.noteTable.updateTable();
+				this.newNotePanel.clear();
 			}
 		});
 
@@ -104,8 +91,13 @@ public class MainController {
 		});
 
 		this.noteTable.setSelectionListener((e) -> {
-			this.newNotePanel.setNote(noteStore.getAll().get(noteTable.getSelected()));
-			this.mainView.setscrollPaneContent(newNotePanel);
+			ArrayList<Note> list = noteStore.getAll();
+			int selected = noteTable.getSelected();
+
+			if (selected >= 0 && list.size() >= selected) {
+				this.newNotePanel.setNote(list.get(selected));
+			}
+			// this.mainView.setscrollPaneContent(newNotePanel);
 		});
 
 	}

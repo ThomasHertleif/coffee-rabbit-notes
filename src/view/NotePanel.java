@@ -85,4 +85,12 @@ public class NotePanel extends JPanel {
 		cboxPrio.setSelectedItem(sNote.getPriority());
 		textArea.setText(sNote.getText());
 	}
+	
+	public void clear() {
+
+		txtTitle.setText("");
+		cboxPrio.setSelectedItem("");
+		textArea.setText("");
+	
+	}
 }

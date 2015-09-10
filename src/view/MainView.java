@@ -21,18 +21,15 @@ import model.*;
 public class MainView {
 
 	private JFrame frame;
-	private JTextField txtSearch;
 	private JButton btnNewNote;
 	private JScrollPane scrollPane = new JScrollPane();
 	private JMenuBar menuBar;
 	private JMenu mnHelp;
 	private JMenuItem mnAbout;
-	private JMenu mnDatei;
-	private JMenuItem mntmOpenFile;
 	private JScrollPane scrollTable;
 	private NoteTable noteTable;
 	private Store<Note> noteStore;
-	private JMenuItem mnOpenFolder;
+	private JButton btnOpenFolder;
 
 	public MainView() {
 		initialize();
@@ -50,15 +47,13 @@ public class MainView {
 		frame.setBounds(100, 100, 843, 562);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow 150][grow][grow]", "[][grow]"));
+		
+		btnOpenFolder = new JButton("Ordner öffnen");
+		frame.getContentPane().add(btnOpenFolder, "cell 0 0");
 
 		btnNewNote = new JButton("Neue Notiz");
 
 		frame.getContentPane().add(btnNewNote, "cell 1 0,alignx center");
-
-		txtSearch = new JTextField();
-		txtSearch.setText("Suche");
-		frame.getContentPane().add(txtSearch, "cell 2 0,growx");
-		txtSearch.setColumns(10);
 
 		scrollTable = new JScrollPane();
 		frame.getContentPane().add(scrollTable, "cell 0 1,grow");
@@ -69,15 +64,8 @@ public class MainView {
 
 		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-
-		mnDatei = new JMenu("Datei");
-		menuBar.add(mnDatei);
-
-		mntmOpenFile = new JMenuItem("Datei öffnen");
-		mnDatei.add(mntmOpenFile);
-
-		mnOpenFolder = new JMenuItem("Ordner öffnen");
-		mnDatei.add(mnOpenFolder);
+		
+		
 
 		mnHelp = new JMenu("Hilfe");
 		menuBar.add(mnHelp);
@@ -107,11 +95,7 @@ public class MainView {
 		this.scrollTable.setViewportView(newPanel);
 	}
 
-	public void setFileOpenListener(ActionListener l) {
-		this.mntmOpenFile.addActionListener(l);
-	}
-
 	public void setFolderListener(ActionListener l) {
-		this.mnOpenFolder.addActionListener(l);
+		this.btnOpenFolder.addActionListener(l);
 	}
 }
