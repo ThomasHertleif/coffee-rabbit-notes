@@ -23,6 +23,7 @@ public class NotePanel extends JPanel {
 	private JButton btnSave = new JButton("Speichern");
 
 	private Note currentNote = null;
+	private final JButton btnDelete = new JButton("Löschen");
 
 	public NotePanel() {
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
@@ -44,11 +45,17 @@ public class NotePanel extends JPanel {
 		cboxPrio.addItem("Mittel");
 		cboxPrio.addItem("Hoch");
 		cboxPrio.setSelectedItem("Mittel");
+		
+		add(btnDelete, "cell 1 2,alignx center");
 
 	}
 
 	public void setSaveListener(ActionListener l) {
 		this.btnSave.addActionListener(l);
+	}
+	
+	public void setDeleteListener(ActionListener l){
+		this.btnDelete.addActionListener(l);
 	}
 
 	public String getTitle() {

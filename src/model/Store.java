@@ -22,6 +22,10 @@ public class Store<T> {
 		return data;
 	}
 	
+	public void removeNote(Note dNote) {
+		data.remove(dNote);
+	}
+	
 	public void clearStore() {
 		if (data.isEmpty() == false) {
 			for (int i = 0; i < data.size(); i++) {

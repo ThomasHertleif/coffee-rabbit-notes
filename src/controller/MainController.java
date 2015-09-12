@@ -73,6 +73,15 @@ public class MainController {
 				this.newNotePanel.clear();
 			}
 		});
+		
+		this.newNotePanel.setDeleteListener((e) -> {
+			this.noteWriter.deleteNoteFromDisk(this.newNotePanel.getCurrentNote());
+			this.noteStore.removeNote(this.newNotePanel.getCurrentNote());
+			this.newNotePanel.clear();
+			this.newNotePanel.removeNote();
+			this.noteTable.updateTable();
+			
+		});
 
 		this.noteTable.setSelectionListener((e) -> {
 			ArrayList<Note> list = noteStore.getAll();

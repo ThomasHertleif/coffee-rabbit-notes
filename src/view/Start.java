@@ -35,7 +35,7 @@ public class Start {
 		JLabel lblPasswort = new JLabel("Passwort = 1337");
 		frame.getContentPane().add(lblPasswort, "cell 0 0");
 		
-		JLabel lblEsStandNirgenwo = new JLabel(" Es stand nirgenwo das das Passwort benutzerdefiniert sein soll...");
+		JLabel lblEsStandNirgenwo = new JLabel("Es stand nirgendwo das das Passwort benutzerdefiniert sein soll...");
 		frame.getContentPane().add(lblEsStandNirgenwo, "cell 0 1");
 		
 		txtPW = new JTextField();
