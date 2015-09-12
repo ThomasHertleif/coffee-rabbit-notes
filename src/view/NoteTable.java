@@ -33,10 +33,9 @@ public class NoteTable extends JPanel {
 		dtm = new DefaultTableModel(0, 0);
 		dtm.setColumnIdentifiers(new String[] { "Name", "Erstellt", "Geändert", "Priorität" });
 		
-		
-
 		tbl_noteList = new JTable(dtm);
 		tbl_noteList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbl_noteList.setAutoCreateRowSorter(true);
 
 		selectionModel = tbl_noteList.getSelectionModel();
 
