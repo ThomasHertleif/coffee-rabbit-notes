@@ -5,6 +5,7 @@ import view.*;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -32,9 +33,16 @@ public class MainController {
 		this.mainView.setScrollTable(noteTable);
 
 		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/");
-		File[] listOfFiles = dir.listFiles();
+		File[] listOfNoteFile = dir.listFiles(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".txt");
+			}
+		});
+		
 		if (dir.exists() == true) {
-			this.noteLoader.loadDirectory(listOfFiles);
+			this.noteLoader.loadDirectory(listOfNoteFile);
 			this.noteTable.updateTable();
 		}
 		dir.mkdir();
