@@ -1,8 +1,6 @@
 package model;
 
 import java.io.*;
-import java.util.stream.Stream;
-import java.util.zip.*;
 
 public class NoteWriter {
 
@@ -13,46 +11,6 @@ public class NoteWriter {
 	public NoteWriter(Store<Note> noteStore) {
 		this.noteStore = noteStore;
 	}
-
-	// public Stream<String[]> serializeNotes(Store<Note> notes) {
-	// return notes.getAll().stream().map((note) -> {
-	// // FIXME: add uuid field to note and use it instead of title here.
-	// String[] nameAndContent = { note.getTitle(), note.cearialize() };
-	// return nameAndContent;
-	// });
-	// }
-
-	// Maybe for later use...
-	// public void newNotebook(String name) {
-	//
-	// try {
-	// FileOutputStream dest = new
-	// FileOutputStream("C:/Users/Thomas/Documents/Notes/" + name + ".crnz");
-	// ZipOutputStream zipOut = new ZipOutputStream(new
-	// BufferedOutputStream(dest));
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// }
-	// }
-
-	// public void writeToDisk(Stream<String[]> textStream) {
-	// textStream.forEach((nameAndContent) -> {
-	// try {
-	//
-	// FileOutputStream dest = new
-	// FileOutputStream("C:/Users/Thomas/Documents/Notes/" + "jim" + ".crnz");
-	// ZipOutputStream zipOut = new ZipOutputStream(new
-	// BufferedOutputStream(dest));
-	//
-	// ZipEntry e = new ZipEntry(nameAndContent[0]);
-	//
-	// zipOut.putNextEntry(e);
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// });
-	// }
 
 	public void writeToDisk(Note note) {
 
@@ -75,8 +33,8 @@ public class NoteWriter {
 	}
 
 	public void deleteNoteFromDisk(Note dNote) {
-		File dir = new File(
-				"C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/" + dNote.getTitle() + ".crnz");
+		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/"
+				+ dNote.getTitle() + ".crnz");
 		dir.delete();
 	}
 }

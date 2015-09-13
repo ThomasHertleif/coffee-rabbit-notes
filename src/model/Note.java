@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class Note {
 
@@ -10,16 +11,20 @@ public class Note {
 	private LocalDateTime changeDate;
 	private String priority;
 	private String text;
+	private String uuid;
 
 	public Note(String title, String prio, String note) {
+		UUID id = UUID.randomUUID();
+		
 		this.title = title;
 		this.createDate = LocalDateTime.now();
 		this.changeDate = LocalDateTime.now();
 		this.priority = prio;
 		this.text = note;
+		this.uuid = id.toString();
 	}
 	
-	public Note(String title, String prio, String note, String create, String change) {
+	public Note(String title, String prio, String note, String create, String change, String uuid) {
 		
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 		this.title = title;
@@ -27,6 +32,7 @@ public class Note {
 		this.changeDate = LocalDateTime.parse(change, dateFormatter);
 		this.priority = prio;
 		this.text = note;
+		this.uuid = uuid;
 		
 		this.updateChangeDate();
 	}
@@ -58,6 +64,10 @@ public class Note {
 	public String getTitle() {
 		return title;
 	}
+	
+	public String getUUID() {
+		return uuid;
+	}
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -75,6 +85,7 @@ public class Note {
 				"priority: \"" + this.getPriority() + "\"\n" +
 				"created: \"" + this.getCreateDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\"\n" +
 				"changed: \"" + this.getChangeDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\"\n" +
+				"uuid: \"" + this.getUUID() + "\"\n" +
 				"---\n" + this.getText() + "\n";
 	}
 

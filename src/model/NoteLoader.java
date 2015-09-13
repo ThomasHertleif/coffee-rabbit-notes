@@ -23,12 +23,13 @@ public class NoteLoader {
 		String priority = sc.nextLine().replaceAll(keyVal, "${val}");
 		String created = sc.nextLine().replaceAll(keyVal, "${val}");
 		String changed = sc.nextLine().replaceAll(keyVal, "${val}");
+		String uuid = sc.nextLine().replaceAll(keyVal, "${val}");
 
 		sc.nextLine(); // "---"
 
 		String content = sc.useDelimiter("\\A").next();
 
-		Note leNote = new Note(title, priority, content, created, changed);
+		Note leNote = new Note(title, priority, content, created, changed, uuid);
 
 		sc.close();
 
@@ -40,7 +41,7 @@ public class NoteLoader {
 		this.noteStore.clearStore();
 		
 		
-		
+		// Maybe remove cfg from scann...
 		for (int i = 0; i < files.length; i++) {
 			Scanner sc = new Scanner(files[i]);	
 			sc.nextLine(); // "---"
@@ -49,11 +50,12 @@ public class NoteLoader {
 			String priority = sc.nextLine().replaceAll(keyVal, "${val}");
 			String created = sc.nextLine().replaceAll(keyVal, "${val}");
 			String changed = sc.nextLine().replaceAll(keyVal, "${val}");
+			String uuid = sc.nextLine().replaceAll(keyVal, "${val}");
 
 			sc.nextLine(); // "---"
 
 			String content = sc.useDelimiter("\\A").next();
-			Note leNote = new Note(title, priority, content, created, changed);
+			Note leNote = new Note(title, priority, content, created, changed, uuid);
 
 			noteStore.add(leNote);
 			sc.close();
