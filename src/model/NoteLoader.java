@@ -41,7 +41,6 @@ public class NoteLoader {
 		this.noteStore.clearStore();
 		
 		
-		// Maybe remove cfg from scann...
 		for (int i = 0; i < files.length; i++) {
 			Scanner sc = new Scanner(files[i]);	
 			sc.nextLine(); // "---"
