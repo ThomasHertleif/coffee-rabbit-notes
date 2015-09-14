@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
