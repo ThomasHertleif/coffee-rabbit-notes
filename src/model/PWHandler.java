@@ -21,6 +21,11 @@ public class PWHandler {
 	}
 
 	public void createCFG(String pw) throws IOException {
+		File dir = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/");
+		if (dir.exists() == false) {
+			dir.mkdir();
+		}
+		
 		File cfg = new File("C:/Users/" + System.getProperty("user.name").toString() + "/Documents/CRNotes/crnz.cfg");
 		if (cfg.exists() == false) {
 			FileWriter writer = new FileWriter(cfg);
